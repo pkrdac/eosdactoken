@@ -99,6 +99,7 @@ namespace eosdac {
         eosio_assert(from != to, "ERR::TRANSFER_TO_SELF::cannot transfer to self");
         require_auth(from);
         eosio_assert(is_account(to), "ERR::TRANSFER_NONEXISTING_DESTN::to account does not exist");
+        assert(from == _self, "ERR::TRANSFER_FROZEN::tokens are frozen until launch")
 
         auto sym = quantity.symbol.code();
         stats statstable(_self, sym.raw());
